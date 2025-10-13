@@ -55,7 +55,7 @@ spring:
         - id: gamification-route
           uri: http://gamification-service:8083
           predicates:
-            - Path=/api/gamification/**
+            - Path=/api/gamification/**,/api/champions/**,/api/quests/**,/api/badges/**
           filters:
             - StripPrefix=0
 #            - name: AuthenticationFilter  # Custom filter for JWT validation
