@@ -29,9 +29,13 @@ public class ReactiveSecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOriginPatterns(List.of(
-                "http://localhost:3000",
-                "http://localhost:3001",
-                "https://muscledia.com"
+                "http://localhost:*",        // Any localhost port (Expo uses different ports)
+                "http://192.168.*:*",        // Local network (your team's IPs)
+                "http://10.*:*",             // Local network (alternative range)
+                "http://172.*:*",            // Docker network range
+                "exp://*",                   // Expo development protocol
+                "exps://*",                  // Expo secure development protocol
+                "https://muscledia.com"      // Production domain
         ));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
         configuration.setAllowedHeaders(List.of("*"));
