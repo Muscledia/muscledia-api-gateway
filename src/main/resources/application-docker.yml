@@ -4,11 +4,29 @@ spring:
       globalcors:
         corsConfigurations:
           '[/**]':
-            allowedOrigins:
-              - "http://localhost:3000"
-              - "http://localhost:3001"
-              - "http://nginx"
-              - "http://api-gateway:8080"
+            allowedOriginPatterns: # Use patterns instead of exact origins
+              - "http://localhost:*"        # Any localhost port (Expo uses different ports)
+              - "http://192.168.*:*"        # Local network (your team's IPs)
+              - "http://10.*:*"             # Local network (alternative range)
+              - "http://172.*:*"            # Docker network range
+              - "exp://*"                   # Expo development protocol
+              - "exps://*"                  # Expo secure development protocol
+              - "http://nginx"              # Keep your existing nginx
+              - "http://api-gateway:8080"   # Keep your existing gateway
+              - "https://muscledia.com"     # Production domain
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+              - PATCH
+            allowedHeaders:
+              - "*"
+            allowCredentials: true
+            exposedHeaders:
+              - Authorization
+            maxAge: 3600
 
 eureka:
   client:
