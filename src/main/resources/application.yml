@@ -33,6 +33,14 @@ spring:
 #              args:
 #                enabled: true
 
+        # AI Service Routes
+        - id: ai-public
+          uri: http://ai-service:8084
+          predicates:
+            - Path=/ollama/**
+          filters:
+            - StripPrefix=0
+
         # Workout Service Routes (Public)
         - id: workout-public
           uri: http://workout-service:8082
